@@ -76,22 +76,23 @@ export class PathfindingComponent implements OnInit {
   }
 
   visualize() {
-    switch (this.selectedAlgorithm) {
-      case Algorithm.Dijkstra:
-        const startNode = this.grid[this.START_ROW][this.START_COL];
-        const finishNode = this.grid[this.FINISH_ROW][this.FINISH_COL];
+    const startNode = this.grid[this.START_ROW][this.START_COL];
+    const finishNode = this.grid[this.FINISH_ROW][this.FINISH_COL];
 
-        const visitedNodesInOrder = this.pf.dijkstra(this.grid, startNode, finishNode);
-        const nodesInShortestPathOrder = this.pf.getNodesInShortestPathOrder(finishNode);
-        this.animate(visitedNodesInOrder, nodesInShortestPathOrder);
-        break;
-      case Algorithm.BreadthFirstSearch:
-        break;
-      case Algorithm.DepthFirstSearch:
-        break;
-      default:
-        break;
-    }
+    const visitedNodesInOrder = this.pf.dijkstra(this.grid, startNode, finishNode);
+    const nodesInShortestPathOrder = this.pf.getNodesInShortestPathOrder(finishNode);
+    this.animate(visitedNodesInOrder, nodesInShortestPathOrder);
+    // switch (this.selectedAlgorithm) {
+    //   case Algorithm.Dijkstra:
+
+    //     break;
+    //   case Algorithm.BreadthFirstSearch:
+    //     break;
+    //   case Algorithm.DepthFirstSearch:
+    //     break;
+    //   default:
+    //     break;
+    // }
   }
 
   createGrid() {

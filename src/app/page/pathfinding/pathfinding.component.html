@@ -4,8 +4,7 @@
     </div>
     <div class="actions">
 
-        <button class="btn" (click)="visualize() " style="background-color: rgb(22 163 74 )"
-            [disabled]="!selectedAlgorithm">{{
+        <button class="btn" (click)="visualize() " style="background-color: rgb(22 163 74 )">{{
             selectedAlgorithm >= 0?
             "Visualize : " + algorithms[selectedAlgorithm].abbreviation : "Select algorithm"}}</button>
 
