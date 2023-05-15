@@ -17,7 +17,13 @@
         height: 10px;
         border-bottom: 4px solid #402471;
         border-right: 4px solid #402471;
-        transform: rotateZ(-45deg);
+        transform: rotateZ(-45deg) scale(1);
+    }
+}
+
+.node-scale-down {
+    &::after {
+        transform: rotateZ(-45deg) scale(0.7);
     }
 }
 
