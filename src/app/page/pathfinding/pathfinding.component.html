@@ -1,0 +1,44 @@
+<div class="nav">
+    <div class="title">
+        <p>Pathfinder Visualizer</p>
+    </div>
+    <div class="actions">
+        <div class="btn">
+            <a href="#">Algorithms<span class="gg-chevron-down"></span></a>
+            <div class="dropdown-menu">
+                <ul>
+                    <li>Dijkstra's Algorithm</li>
+                </ul>
+            </div>
+        </div>
+        <div class="btn">
+            <a href="#">Maze<span class="gg-chevron-down"></span></a>
+            <div class="dropdown-menu">
+                <ul>
+                    <li>Dijkstra's Algorithm</li>
+                </ul>
+            </div>
+        </div>
+        <div class="btn">
+            <a href="#">Speed<span class="gg-chevron-down"></span></a>
+            <div class="dropdown-menu">
+                <ul>
+                    <li>Dijkstra's Algorithm</li>
+                </ul>
+            </div>
+        </div>
+        <div class="btn" (click)="visualize()" style="background-color: rgb(22 163 74 )">Visualize</div>
+        <div class="btn" (click)="reset()" style="background-color: rgb(239 68 68);">Reset</div>
+    </div>
+
+</div>
+<div class="container">
+    <div class="grid">
+        <div *ngFor="let nodeRow of grid" class="grid-row">
+            <div *ngFor="let node of nodeRow">
+                <app-node [node]="node" (onMouseEnterEvent)="onMouseEnter($event)" (onMouseUpEvent)="onMouseUp($event)"
+                    (onMouseDownEvent)="onMouseDown($event)"></app-node>
+            </div>
+        </div>
+    </div>
+</div>

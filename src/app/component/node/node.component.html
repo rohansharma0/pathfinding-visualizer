@@ -1,0 +1,4 @@
+<div [id]=" 'node-' + node.x + '-'+node.y"
+    [ngClass]=" node.isStart ? 'node node-start' : node.isFinish ? 'node node-finish' : node.isWall ? 'node node-wall' : 'node'"
+    (mouseenter)="onMouseEnter(node)" (mousedown)="onMouseDown(node)" (mouseup)="onMouseUp(node)">
+</div>
