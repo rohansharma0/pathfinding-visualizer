@@ -128,15 +128,14 @@
     align-items: center;
     height: 90vh;
 
-    .grid {
-        border: 1px solid rgb(175, 216, 248);
-        width: fit-content;
-        display: flex;
-        flex-direction: column;
+    table {
+        border-collapse: collapse;
 
-        .grid-row {
-            display: flex;
-            flex-direction: row;
+        td {
+            border: 1px solid rgb(175, 216, 248);
+            width: 25px;
+            height: 25px;
         }
     }
+
 }

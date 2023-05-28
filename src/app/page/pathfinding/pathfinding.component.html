@@ -24,12 +24,15 @@
 
 </div>
 <div class="container">
-    <div class="grid">
-        <div *ngFor="let nodeRow of grid" class="grid-row">
-            <div *ngFor="let node of nodeRow">
-                <app-node [node]="node" (onMouseEnterEvent)="onMouseEnter($event)" (onMouseUpEvent)="onMouseUp($event)"
-                    (onMouseDownEvent)="onMouseDown($event)"></app-node>
-            </div>
-        </div>
-    </div>
+    <table>
+        <tbody>
+            <tr *ngFor="let nodeRow of grid">
+                <td *ngFor="let node of nodeRow">
+                    <app-node [node]="node" (onMouseEnterEvent)="onMouseEnter($event)"
+                        (onMouseUpEvent)="onMouseUp($event)" (onMouseDownEvent)="onMouseDown($event)"></app-node>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>

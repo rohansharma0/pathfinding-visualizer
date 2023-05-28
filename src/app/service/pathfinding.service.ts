@@ -6,6 +6,65 @@ import { Node } from '../model/node';
 })
 export class PathfindingService {
 
+  // Depth First Search
+  depthFisrtSearch(grid: Node[][], startNode: Node, finishNode: Node) {
+
+    let visitedNodesInOrder: Node[] = [];
+
+    let queue: Node[] = [];
+    grid[startNode.x][startNode.y].isVisited = true;
+
+    queue.push(startNode);
+
+    while (queue.length > 0) {
+
+      const node: Node = queue[0];
+
+      if (node.isWall) continue;
+
+      visitedNodesInOrder.push(node);
+
+      if (node === finishNode) return visitedNodesInOrder;
+
+      console.log(node);
+
+      queue.shift();
+
+      const neighbors = this.getUnvisitedNeighbors(node, grid);
+
+      for (const neighbor of neighbors) {
+        grid[neighbor.x][neighbor.y].isVisited = true;
+        queue.push(neighbor);
+      };
+
+    }
+
+    return visitedNodesInOrder;
+  }
+
+  private dfs(grid: Node[][], startNode: Node, finishNode: Node, visitedNodesInOrder: Node[]) {
+
+    if (startNode.isVisited || startNode.isWall || startNode.isFinish) return;
+
+    visitedNodesInOrder.push(startNode);
+
+    const { x, y } = startNode;
+    console.log(grid[x][y]);
+
+
+    grid[x][y].isVisited = true;
+
+    if (x - 1 >= 0) this.dfs(grid, grid[x - 1][y], finishNode, visitedNodesInOrder);
+
+    if (y + 1 < grid[x].length) this.dfs(grid, grid[x][y + 1], finishNode, visitedNodesInOrder);
+
+    if (x + 1 < grid.length) this.dfs(grid, grid[x + 1][y], finishNode, visitedNodesInOrder);
+
+    if (y - 1 >= 0) this.dfs(grid, grid[x][y - 1], finishNode, visitedNodesInOrder);
+
+  }
+
+  // Dijkstra Algorithm 
   dijkstra(grid: Node[][], startNode: Node, finishNode: Node) {
 
     let visitedNodesInOrder: Node[] = [];
@@ -52,9 +111,9 @@ export class PathfindingService {
     const neighbors = [];
     const { x, y } = node;
     if (x - 1 >= 0) neighbors.push(grid[x - 1][y]);
+    if (y + 1 < grid[x].length) neighbors.push(grid[x][y + 1]);
     if (x + 1 < grid.length) neighbors.push(grid[x + 1][y]);
     if (y - 1 >= 0) neighbors.push(grid[x][y - 1]);
-    if (y + 1 < grid[x].length) neighbors.push(grid[x][y + 1]);
 
     return neighbors.filter(neighbor => !neighbor.isVisited);
   }

@@ -1,4 +1,4 @@
-import { Component, HostListener, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Algorithm } from 'src/app/model/algorithm';
 import { Node } from 'src/app/model/node';
 import { PathfindingService } from 'src/app/service/pathfinding.service';
@@ -13,20 +13,28 @@ export class PathfindingComponent implements OnInit {
 
   constructor(private pf: PathfindingService) { }
 
-  // getting current screen size
-  // @HostListener('window:resize', ['$event'])
-  // getScreenSize() {
-  //   const screenHeight = window.innerHeight;
-  //   const screenWidth = window.innerWidth;
 
-  //   const gridWidth = screenWidth;
-  //   const gridHight = screenHeight * 0.9;
+  ngOnInit() {
+    this.createGrid();
+    this.getScreenSize();
+  }
 
-  //   this.TOTAL_ROW = Math.round(gridHight / 25);
-  //   this.TOTAL_COL = Math.round(gridWidth / 25);
+  //getting current screen size
+  @HostListener('window:resize', ['$event'])
+  getScreenSize() {
+    const screenHeight = window.innerHeight;
+    const screenWidth = window.innerWidth;
 
-  //   this.createGrid();
-  // }
+    const gridWidth = screenWidth;
+    const gridHight = screenHeight * 0.9;
+
+    this.TOTAL_ROW = Math.floor(gridHight / 25);
+    this.TOTAL_COL = Math.floor(gridWidth / 25);
+
+    this.createGrid();
+    console.log(this.TOTAL_ROW + "-" + this.TOTAL_COL);
+
+  }
 
   // speedOptions = [Speed.SLOW, Speed.MEDIUM, Speed.FAST];
 
@@ -36,11 +44,23 @@ export class PathfindingComponent implements OnInit {
   INIT_START_ROW = 5;
   INIT_START_COL = 5;
 
+  INIT_FINISH_ROW = 15;
+  INIT_FINISH_COL = 40;
+
+  // TOTAL_ROW = 5;
+  // TOTAL_COL = 5;
+
+  // INIT_START_ROW = 0;
+  // INIT_START_COL = 2;
+
+
+  // INIT_FINISH_ROW = 4;
+  // INIT_FINISH_COL = 3;
+
+
   START_ROW = this.INIT_START_ROW;
   START_COL = this.INIT_START_COL;
 
-  INIT_FINISH_ROW = 15;
-  INIT_FINISH_COL = 40;
 
   FINISH_ROW = this.INIT_FINISH_ROW;
   FINISH_COL = this.INIT_FINISH_COL;
@@ -59,9 +79,6 @@ export class PathfindingComponent implements OnInit {
   mouseDownPressedNode!: Node;
 
 
-  ngOnInit() {
-    this.createGrid();
-  }
 
   getAlgorithm(event: any) {
     this.selectedAlgorithm = Number(event.target.value);
@@ -81,7 +98,16 @@ export class PathfindingComponent implements OnInit {
 
     const visitedNodesInOrder = this.pf.dijkstra(this.grid, startNode, finishNode);
     const nodesInShortestPathOrder = this.pf.getNodesInShortestPathOrder(finishNode);
+
+    // const visitedNodesInOrder = this.pf.depthFisrtSearch(this.grid, startNode, finishNode);
+
+    // console.log(visitedNodesInOrder);
+
+
     this.animate(visitedNodesInOrder, nodesInShortestPathOrder);
+
+
+
     // switch (this.selectedAlgorithm) {
     //   case Algorithm.Dijkstra:
 
